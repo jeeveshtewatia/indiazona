@@ -22,6 +22,8 @@ import {
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { homeIconDashboard, ordersIcon, productIcon } from "../svgs/IconSvgs";
+import { Fullscreen } from "@mui/icons-material";
+import ProductDetails from "./ProductDetails";
 
 const LogoIcon = (
   <svg
@@ -393,6 +395,7 @@ export default function PermanentDrawerLeft() {
               borderRadius: "5px",
               marginTop: "20px",
             }}
+            expanded={false}
           >
             <AccordionSummary
               expandIcon={
@@ -403,6 +406,8 @@ export default function PermanentDrawerLeft() {
                   Edit
                 </Button>
               }
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
               // sx={{ transform: "none" }}
             >
               <Typography>
@@ -410,13 +415,21 @@ export default function PermanentDrawerLeft() {
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Button variant="outlined">Edit</Button>
+              <ProductDetails />
             </AccordionDetails>
           </Accordion>
         ))}
-        <Button variant="contained" sx={{ mt: 2 }}>
-          Upload Product
-        </Button>
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+          }}
+        >
+          <Button variant="contained" sx={{ mt: 2 }}>
+            Upload Product
+          </Button>
+        </Box>
       </Box>
     </Box>
   );
