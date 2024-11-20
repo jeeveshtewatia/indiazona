@@ -69,6 +69,7 @@ const LogoIcon = (
 );
 
 const categoryNavbarMapping = {
+  default: "Add New Product",
   addNewProduct: "Add New Product",
   bulkListing: "Bulk Product Listing",
 };
@@ -243,6 +244,9 @@ const navigationMenu = [
 ];
 
 export default function PermanentDrawerLeft() {
+  const [search, setSearch] = React.useState("");
+  const [expanded, setExpanded] = React.useState(false);
+  console.log("🚀 ~ PermanentDrawerLeft ~ expanded:", expanded);
   const [params, setParams] = useSearchParams();
   const category = params.get("category");
   return (
@@ -331,9 +335,20 @@ export default function PermanentDrawerLeft() {
           <Typography>Dashboard</Typography>
         </Box>
         {navigationMenu.map((item, index) => (
-          <Accordion sx={{ boxShadow: "none", border: "none" }}>
+          <Accordion
+            sx={{ boxShadow: "none", border: "none" }}
+            expanded={expanded === item.title}
+            onChange={(e, expanded) =>
+              setExpanded(expanded ? item.title : false)
+            }
+          >
             <AccordionSummary
-              sx={{ boxShadow: "none", border: "none" }}
+              sx={{
+                boxShadow: "none",
+                display: "flex",
+                border: "none",
+                alignItems: "center",
+              }}
               expandIcon={index !== 0 ? null : <ArrowDownwardIcon />}
               // aria-controls="panel1-content"
               // id="panel1-header"
@@ -377,6 +392,7 @@ export default function PermanentDrawerLeft() {
           alignItems: "center",
           justifyContent: "space-between",
           backgroundColor: "#ffff",
+          zIndex: 1000,
         }}
       >
         <Typography
@@ -387,9 +403,11 @@ export default function PermanentDrawerLeft() {
             ml: "20px",
           }}
         >
-          {categoryNavbarMapping[category]}{" "}
+          {category
+            ? categoryNavbarMapping[category]
+            : categoryNavbarMapping["default"]}{" "}
         </Typography>
-        <Box sx={{ display: "flex", alignItems: "center", ml: 2, gap: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center", mr: "20px", gap: 2 }}>
           <input
             type="text"
             placeholder={` Searching for something`}
@@ -398,6 +416,8 @@ export default function PermanentDrawerLeft() {
               borderRadius: "15px",
               padding: "8px",
             }}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
           <Paper
@@ -416,9 +436,9 @@ export default function PermanentDrawerLeft() {
           </Paper>
           <Paper
             sx={{
-              width: 40,
-              height: 30,
-              borderRadius: "30%",
+              width: "78px",
+              height: "30px",
+              borderRadius: "25px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -426,10 +446,55 @@ export default function PermanentDrawerLeft() {
               padding: "3px 10px ",
             }}
           >
-            {/* <SearchIcon sx={{ color: "white" }} /> */}
-            eng
+            <Typography
+              component="span"
+              sx={{
+                fontSize: "16px",
+                color: "#00C53C",
+                fontWeight: 700,
+                mr: 1,
+              }}
+            >
+              Eng
+            </Typography>
+
             {languageDownIcon}
           </Paper>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <img
+              src={"/images/profile.png"}
+              alt="profile"
+              width={60}
+              height={60}
+              style={{ borderRadius: "50%" }}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                // alignItems: "center",
+                flexDirection: "column",
+                // gap: 1,
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  fontWeight: 600,
+                  color: "#3F59A3",
+                }}
+              >
+                Mr Abc
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: "14px",
+                  fontWeight: 700,
+                }}
+              >
+                Seller{" "}
+              </Typography>
+            </Box>
+          </Box>
           {/* <Button sx={{ ml: 1, color: "#3F59A3" }}>
             <SearchIcon />
           </Button> */}
@@ -441,6 +506,7 @@ export default function PermanentDrawerLeft() {
         </Toolbar> */}
       </Box>
       {category === "addNewProduct" && <AddNewProduct />}
+      {!category && <AddNewProduct />}
       {category === "bulkListing" && <BulkListing />}
     </Box>
   );
