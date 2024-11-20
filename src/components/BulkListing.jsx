@@ -14,7 +14,7 @@ import { videoIcon } from "../svgs/IconSvgs";
 
 const HighlightText = ({ children }) => {
   return (
-    <Typography component="span" sx={{ color: "#FF8C00", fontWeight: "bold" }}>
+    <Typography component="span" sx={{ color: "#FF8C00", fontWeight: 500 }}>
       {children}
     </Typography>
   );

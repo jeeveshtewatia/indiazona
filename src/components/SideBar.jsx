@@ -387,7 +387,7 @@ export default function PermanentDrawerLeft() {
         sx={{
           width: `calc(100% - ${drawerWidth}px)`,
           ml: `${drawerWidth}px`,
-          padding: "20px 0",
+          padding: "15px 0",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
