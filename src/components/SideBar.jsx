@@ -18,12 +18,24 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  Paper,
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { homeIconDashboard, ordersIcon, productIcon } from "../svgs/IconSvgs";
+import {
+  homeIconDashboard,
+  languageDownIcon,
+  notificationIcon,
+  ordersIcon,
+  productIcon,
+  searchIcon,
+} from "../svgs/IconSvgs";
 import { Fullscreen } from "@mui/icons-material";
 import ProductDetails from "./ProductDetails";
+import BulkListingUI from "./BulkListing";
+import { useSearchParams } from "react-router-dom";
+import AddNewProduct from "./AddNewProduct";
+import BulkListing from "./BulkListing";
 
 const LogoIcon = (
   <svg
@@ -56,6 +68,10 @@ const LogoIcon = (
   </svg>
 );
 
+const categoryNavbarMapping = {
+  addNewProduct: "Add New Product",
+  bulkListing: "Bulk Product Listing",
+};
 const drawerWidth = 240;
 const navigationMenu = [
   {
@@ -66,13 +82,13 @@ const navigationMenu = [
     subTitle: [
       {
         title: "Add New Product",
-        id: "",
+        id: "addNewProduct",
         onclick: "",
       },
       {
         title: "Bulk Listing",
-        id: "",
-        onclick: "",
+        id: "bulkListing",
+        onclick: "  ",
       },
       {
         title: "All Products",
@@ -227,6 +243,8 @@ const navigationMenu = [
 ];
 
 export default function PermanentDrawerLeft() {
+  const [params, setParams] = useSearchParams();
+  const category = params.get("category");
   return (
     <Box sx={{ display: "flex" }}>
       {/* <CssBaseline /> */}
@@ -240,39 +258,6 @@ export default function PermanentDrawerLeft() {
           </Typography>
         </Toolbar>
       </AppBar> */}
-      <Box
-        position="fixed"
-        sx={{
-          width: `calc(100% - ${drawerWidth}px)`,
-          ml: `${drawerWidth}px`,
-          padding: "20px",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-      >
-        <Button sx={{ color: "#3F59A3", fontWeight: 600, fontSize: "16px" }}>
-          Add New Product
-        </Button>
-        <Box sx={{ display: "flex", alignItems: "center", ml: 2 }}>
-          <input
-            type="text"
-            placeholder="Searching for something"
-            style={{
-              border: "1px solid #ccc",
-              borderRadius: "15px",
-              padding: "8px",
-            }}
-          />
-          {/* <Button sx={{ ml: 1, color: "#3F59A3" }}>
-            <SearchIcon />
-          </Button> */}
-        </Box>
-        {/* <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Add New Product
-          </Typography>
-        </Toolbar> */}
-      </Box>
 
       <Drawer
         sx={{
@@ -363,8 +348,16 @@ export default function PermanentDrawerLeft() {
               <List dense={true}>
                 {item.subTitle.map((subItem, subIndex) => (
                   <ListItem key={subIndex} disablePadding>
-                    <ListItemButton>
-                      <ListItemText primary={subItem.title} />
+                    <ListItemButton
+                      onClick={() => setParams({ category: subItem.id })}
+                    >
+                      <ListItemText
+                        sx={{
+                          fontSize: "14px",
+                          color: `${subItem.id === category ? "#00C53C" : ""}`,
+                        }}
+                        primary={subItem.title}
+                      />
                     </ListItemButton>
                   </ListItem>
                 ))}
@@ -375,62 +368,80 @@ export default function PermanentDrawerLeft() {
         {/* </List> */}
       </Drawer>
       <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
+        position="fixed"
+        sx={{
+          width: `calc(100% - ${drawerWidth}px)`,
+          ml: `${drawerWidth}px`,
+          padding: "20px 0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          backgroundColor: "#ffff",
+        }}
       >
-        <Toolbar />
-        {[
-          "Product Details",
-          "Delivery Preferences",
-          "Features & Policies",
-          "Weight & Measurements",
-          "Inventory & Pricing",
-          "Product Images & Video",
-        ].map((section, index) => (
-          <Accordion
-            key={index}
-            sx={{
-              backgroundColor: "#FFF7ED",
-              border: "1px solid #FF8C00",
-              borderRadius: "5px",
-              marginTop: "20px",
-            }}
-            expanded={false}
-          >
-            <AccordionSummary
-              expandIcon={
-                <Button
-                  sx={{ background: "#3F59A3", color: "white" }}
-                  disabled={index !== 0}
-                >
-                  Edit
-                </Button>
-              }
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
-              // sx={{ transform: "none" }}
-            >
-              <Typography>
-                {index + 1}. {section}
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <ProductDetails />
-            </AccordionDetails>
-          </Accordion>
-        ))}
-        <Box
+        <Typography
           sx={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "center",
+            color: "#3F59A3",
+            fontWeight: 600,
+            fontSize: "20px",
+            ml: "20px",
           }}
         >
-          <Button variant="contained" sx={{ mt: 2 }}>
-            Upload Product
-          </Button>
+          {categoryNavbarMapping[category]}{" "}
+        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", ml: 2, gap: 2 }}>
+          <input
+            type="text"
+            placeholder={` Searching for something`}
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "15px",
+              padding: "8px",
+            }}
+          />
+
+          <Paper
+            sx={{
+              width: 40,
+              height: 40,
+              borderRadius: "50%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#DEFFE8",
+            }}
+          >
+            {/* <SearchIcon sx={{ color: "white" }} /> */}
+            {notificationIcon}
+          </Paper>
+          <Paper
+            sx={{
+              width: 40,
+              height: 30,
+              borderRadius: "30%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#DEFFE8",
+              padding: "3px 10px ",
+            }}
+          >
+            {/* <SearchIcon sx={{ color: "white" }} /> */}
+            eng
+            {languageDownIcon}
+          </Paper>
+          {/* <Button sx={{ ml: 1, color: "#3F59A3" }}>
+            <SearchIcon />
+          </Button> */}
         </Box>
+        {/* <Toolbar>
+          <Typography variant="h6" noWrap component="div">
+            Add New Product
+          </Typography>
+        </Toolbar> */}
       </Box>
+      {category === "addNewProduct" && <AddNewProduct />}
+      {category === "bulkListing" && <BulkListing />}
     </Box>
   );
 }
