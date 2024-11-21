@@ -226,3 +226,20 @@ export const downloadIcon = (
     />
   </svg>
 );
+export const arrowDownIcon = (
+  <svg
+    width="20"
+    height="19"
+    viewBox="0 0 20 19"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M14.4333 7.521L9.68335 12.271L4.93335 7.521H14.4333Z"
+      fill="#3F59A3"
+      stroke="#3F59A3"
+      stroke-width="1.58333"
+      stroke-linejoin="round"
+    />
+  </svg>
+);

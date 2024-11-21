@@ -33,10 +33,10 @@ import {
   searchIcon,
 } from "../svgs/IconSvgs";
 import { Fullscreen } from "@mui/icons-material";
-import ProductDetails from "./ProductDetails";
+import ProductDetails from "./addNewProduct/ProductDetails";
 import BulkListingUI from "./BulkListing";
 import { useSearchParams } from "react-router-dom";
-import AddNewProduct from "./AddNewProduct";
+import AddNewProduct from "./addNewProduct/AddNewProduct";
 import BulkListing from "./BulkListing";
 import AllProducts from "./allProducts/AllProducts";
 import CircleIcon from "@mui/icons-material/Circle";

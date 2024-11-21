@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import ProductDetails from "./ProductDetails";
+import { arrowDownIcon } from "../../svgs/IconSvgs";
 
 const AddNewProduct = () => {
   return (
@@ -36,21 +37,48 @@ const AddNewProduct = () => {
           // expanded={false}
         >
           <AccordionSummary
-            expandIcon={
-              <Button
-                sx={{ background: "#3F59A3", color: "white" }}
-                disabled={index !== 0}
-              >
-                Edit
-              </Button>
-            }
+            // expandIcon={
+            //   <Button
+            //     sx={{ background: "#3F59A3", color: "white" }}
+            //     disabled={index !== 0}
+            //   >
+            //     Edit
+            //   </Button>
+            // }
             aria-controls="panel1bh-content"
             id="panel1bh-header"
             // sx={{ transform: "none" }}
           >
-            <Typography>
-              {index + 1}. {section}
-            </Typography>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems={"center"}
+              width="100%"
+            >
+              <Typography>
+                {index + 1}. {section}
+              </Typography>
+              <Button
+                variant="outlined"
+                sx={{
+                  border: "1px solid #3F59A3",
+                  color: "#3F59A3",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                }}
+              >
+                Edit
+                <Box
+                  sx={{
+                    marginLeft: "10px",
+                    textAlign: "center",
+                    height: "20px",
+                  }}
+                >
+                  {arrowDownIcon}
+                </Box>
+              </Button>
+            </Box>
           </AccordionSummary>
           <AccordionDetails>
             <ProductDetails />

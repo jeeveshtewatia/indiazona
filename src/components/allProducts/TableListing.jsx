@@ -276,7 +276,12 @@ const TableListing = () => {
                     // inputProps={{ "aria-label": "controlled" }}
                     inputProps={{ "aria-label": "uncontrolled" }}
                   /> */}
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    style={{ width: "16px", height: "16px" }}
+                    onChange={handleCheckboxChange}
+                    value={false}
+                  />
                 </TableCell>
                 <TableCell>
                   <Box
