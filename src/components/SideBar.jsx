@@ -18,7 +18,9 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  InputAdornment,
   Paper,
+  TextField,
 } from "@mui/material";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -36,7 +38,8 @@ import BulkListingUI from "./BulkListing";
 import { useSearchParams } from "react-router-dom";
 import AddNewProduct from "./AddNewProduct";
 import BulkListing from "./BulkListing";
-
+import AllProducts from "./allProducts/AllProducts";
+import CircleIcon from "@mui/icons-material/Circle";
 const LogoIcon = (
   <svg
     width="38"
@@ -72,6 +75,7 @@ const categoryNavbarMapping = {
   default: "Add New Product",
   addNewProduct: "Add New Product",
   bulkListing: "Bulk Product Listing",
+  allProducts: "All Products",
 };
 const drawerWidth = 240;
 const navigationMenu = [
@@ -93,7 +97,7 @@ const navigationMenu = [
       },
       {
         title: "All Products",
-        id: "",
+        id: "allProducts",
         onclick: "",
       },
     ],
@@ -408,13 +412,38 @@ export default function PermanentDrawerLeft() {
             : categoryNavbarMapping["default"]}{" "}
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center", mr: "20px", gap: 2 }}>
-          <input
+          {/* <input
             type="text"
             placeholder={` Searching for something`}
             style={{
               border: "1px solid #ccc",
               borderRadius: "15px",
               padding: "8px",
+            }}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          /> */}
+          <TextField
+            placeholder="Search for something"
+            size="small"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">{searchIcon}</InputAdornment>
+              ),
+            }}
+            sx={{
+              height: "38px",
+              width: "313px",
+              backgroundColor: "#F9F9F9",
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "#E0E0E0", // Light border color
+                  borderRadius: "18px", // Rounded corners
+                },
+                "&:hover fieldset": {
+                  borderColor: "#B0B0B0", // Darker border on hover
+                },
+              },
             }}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -508,6 +537,7 @@ export default function PermanentDrawerLeft() {
       {category === "addNewProduct" && <AddNewProduct />}
       {!category && <AddNewProduct />}
       {category === "bulkListing" && <BulkListing />}
+      {category === "allProducts" && <AllProducts />}
     </Box>
   );
 }
