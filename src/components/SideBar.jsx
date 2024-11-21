@@ -434,7 +434,7 @@ export default function PermanentDrawerLeft() {
             sx={{
               height: "38px",
               width: "313px",
-              backgroundColor: "#F9F9F9",
+              // backgroundColor: "#F9F9F9",
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
                   borderColor: "#E0E0E0", // Light border color

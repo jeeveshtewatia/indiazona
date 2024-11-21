@@ -17,6 +17,8 @@ import {
   MenuItem,
   Select,
   PaginationItem,
+  Popover,
+  Backdrop,
 } from "@mui/material";
 
 import { deleteIcon, editIcon, flowbiteIcon } from "../../svgs/IconSvgs";
@@ -92,7 +94,7 @@ const tableData = [
     price: 654.24,
     status: "Pending",
     featured: false,
-    variant: false,
+    variant: true,
   },
   // Add more rows as needed
 ];
@@ -219,6 +221,30 @@ const TableListing = () => {
   const handleCheckboxChange = () => {
     console.log("checkbox clicked");
   };
+
+  const [anchorEl, setAnchorEl] = useState(null); // Anchor element for the popover
+  const [currentButton, setCurrentButton] = useState(null); // To identify which button triggered the popup
+
+  // Open the popover
+  const handleOpen = (event, buttonId) => {
+    setAnchorEl(event.currentTarget); // Set the button as the anchor element
+    setCurrentButton(buttonId); // Set the button ID
+  };
+
+  // Close the popover
+  const handleClose = () => {
+    setAnchorEl(null);
+    setCurrentButton(null);
+  };
+
+  // Handle confirmation (Yes button)
+  const handleConfirm = () => {
+    console.log(`Confirmed action for button ${currentButton}`);
+    handleClose();
+  };
+
+  const isOpen = Boolean(anchorEl);
+
   return (
     <Box sx={{ padding: "16px" }}>
       <TableContainer component={Paper} sx={{ boxShadow: "none" }}>
@@ -245,11 +271,12 @@ const TableListing = () => {
                 {/* Thumbnail */}
                 <TableCell>
                   {/* <CheckBox
-                    checked={false}
-                    value={false}
+                    defaultChecked={false}
                     onChange={handleCheckboxChange}
-                    inputProps={{ "aria-label": "controlled" }}
+                    // inputProps={{ "aria-label": "controlled" }}
+                    inputProps={{ "aria-label": "uncontrolled" }}
                   /> */}
+                  <input type="checkbox" />
                 </TableCell>
                 <TableCell>
                   <Box
@@ -342,7 +369,7 @@ const TableListing = () => {
                     <IconButton color="error">{flowbiteIcon} </IconButton>
                     <IconButton
                       color="primary"
-                      onClick={() => console.log(row.name)}
+                      onClick={(event) => handleOpen(event, row.status)}
                     >
                       {deleteIcon}
                     </IconButton>
@@ -391,13 +418,87 @@ const TableListing = () => {
           boundaryCount={1}
         />
       </Box>
-      {/* Pagination */}
-
-      {/* <Box
-        sx={{ display: "flex", justifyContent: "flex-end", padding: "16px" }}
+      {/* Popover for Confirmation */}
+      <Backdrop
+        open={isOpen} // Display the backdrop when the popover is open
+        sx={{
+          zIndex: (theme) => theme.zIndex.modal - 1, // Ensure it is behind the popover
+          backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent black
+        }}
+      />
+      <Popover
+        open={isOpen}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        PaperProps={{
+          sx: {
+            borderRadius: "10px",
+            zIndex: (theme) => theme.zIndex.modal,
+            // boxShadow:
+            //   "0px 7.39px 14.78px -2.46px #919EAB1F, 0px 0px 1.23px 0px #919EAB33",
+          },
+        }}
       >
-        <Pagination count={10} variant="outlined" color="primary" />
-      </Box> */}
+        <Box
+          p={1}
+          width="266px"
+          height="133px"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          borderRadius="20px"
+          gap="16px"
+        >
+          <Typography
+            variant="body2"
+            fontWeight={400}
+            fontSize="16px"
+            textAlign={"center"}
+            color="#212121"
+          >
+            Do you really want to delete this products?
+          </Typography>
+          <Box display="flex" justifyContent="center" mt={1} gap="10px">
+            <Button
+              onClick={handleConfirm}
+              color="primary"
+              variant="contained"
+              style={{
+                fontSize: "14px",
+                fontWeight: 500,
+                border: "1px solid #FF8C00",
+                borderRadius: "5px",
+                color: "#FF8C00",
+                background: "white",
+              }}
+            >
+              Yes
+            </Button>
+            <Button
+              onClick={handleClose}
+              color="secondary"
+              style={{
+                fontSize: "14px",
+                fontWeight: 500,
+                borderRadius: "5px",
+                background: "#FF8C00",
+                color: "white",
+              }}
+            >
+              No
+            </Button>
+          </Box>
+        </Box>
+      </Popover>
     </Box>
   );
 };
