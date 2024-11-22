@@ -27,6 +27,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import DownloadIcon from "@mui/icons-material/Download";
 import TableListing from "./TableListing";
 import { downloadIcon } from "../../svgs/IconSvgs";
+import BulkAction from "./BulkAction";
 
 const ProductTable = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -137,24 +138,7 @@ const ProductTable = () => {
             Download
           </Button>
 
-          {/* Bulk Action Button */}
-          <Button
-            variant="outlined"
-            sx={{
-              width: "120px",
-              height: "40px",
-              textTransform: "none",
-              borderColor: "#3F51B5",
-              color: "#3F59A3",
-              "&:hover": {
-                borderColor: "#303F9F",
-                backgroundColor: "rgba(63, 81, 181, 0.04)",
-              },
-            }}
-            onClick={() => console.log("bulk action")}
-          >
-            Bulk Action
-          </Button>
+          <BulkAction />
         </Box>
       </Box>
 

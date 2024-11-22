@@ -37,14 +37,6 @@ const AddNewProduct = () => {
           // expanded={false}
         >
           <AccordionSummary
-            // expandIcon={
-            //   <Button
-            //     sx={{ background: "#3F59A3", color: "white" }}
-            //     disabled={index !== 0}
-            //   >
-            //     Edit
-            //   </Button>
-            // }
             aria-controls="panel1bh-content"
             id="panel1bh-header"
             // sx={{ transform: "none" }}
