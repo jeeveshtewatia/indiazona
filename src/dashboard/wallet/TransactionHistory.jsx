@@ -15,183 +15,10 @@ import {
   Box,
   Divider,
   Pagination,
+  PaginationItem,
 } from "@mui/material";
 import { ArrowDropDown } from "@mui/icons-material";
 import { tableArrowDownIcon, tableArrowUpIcon } from "../../svgs/IconSvgs";
-
-const transactions = [
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  {
-    orderId: "2024W-01",
-    orderDate: "16/11/2024",
-    deliveryDate: "17/11/2024",
-    withdraw: 500,
-    total: 500,
-    deductions: 50,
-    netSales: 450,
-    salesBreakDown: {
-      sales: 300,
-      service_charges: 30,
-      rto_charges: 30,
-      panelties: 30,
-      refund_to_customer: 30,
-      net_sales: 300,
-    },
-  },
-  // Add more transactions as needed
-];
 
 const TableHeader = [
   "Order Id ",
@@ -350,52 +177,79 @@ const RowStyle = ({ row, index }) => {
     </>
   );
 };
-const TransactionHistory = () => {
+const TransactionHistory = ({ tableData }) => {
   return (
-    <TableContainer component={Paper} sx={{ mt: 3 }}>
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            {TableHeader.map((header, index) => (
-              <TableCell
-                sx={{ color: "#A1A1A1", size: "12px", lineHeight: "14px" }}
-                key={index}
-              >
-                {header}
-              </TableCell>
+    <>
+      <TableContainer component={Paper} sx={{ mt: 3 }}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow>
+              {TableHeader.map((header, index) => (
+                <TableCell
+                  sx={{ color: "#A1A1A1", size: "12px", lineHeight: "14px" }}
+                  key={index}
+                >
+                  {header}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {tableData.map((row, index) => (
+              <RowStyle row={row} index={index} />
             ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {transactions.map((row, index) => (
-            <RowStyle row={row} index={index} />
-          ))}
-          <TableRow sx={{ backgroundColor: "#F9FAFC", mt: 2 }}>
-            <TableCell colSpan="4" sx={{ fontWeight: "600" }}>
-              Total
-            </TableCell>
-            <TableCell>
-              ₹{transactions.reduce((acc, curr) => acc + curr.total, 0)}
-            </TableCell>
-            <TableCell>
-              -₹ {transactions.reduce((acc, curr) => acc + curr.deductions, 0)}
-            </TableCell>
-            <TableCell sx={{ fontWeight: "600" }}>
-              ₹
-              {/* {transactions.reduce((acc, curr) => acc + curr.netSales, 0) -
-                transactions.reduce((acc, curr) => acc + curr.deductions, 0)} */}
-              {transactions.reduce((acc, curr) => acc + curr.netSales, 0)}
-            </TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-          {/* <TableRow>
+            <TableRow sx={{ backgroundColor: "#F9FAFC", mt: 2 }}>
+              <TableCell colSpan="4" sx={{ fontWeight: "600" }}>
+                Total
+              </TableCell>
+              <TableCell>
+                ₹{tableData.reduce((acc, curr) => acc + curr.total, 0)}
+              </TableCell>
+              <TableCell>
+                -₹ {tableData.reduce((acc, curr) => acc + curr.deductions, 0)}
+              </TableCell>
+              <TableCell sx={{ fontWeight: "600" }}>
+                ₹
+                {/* {transactions.reduce((acc, curr) => acc + curr.netSales, 0) -
+                tableData.reduce((acc, curr) => acc + curr.deductions, 0)} */}
+                {tableData.reduce((acc, curr) => acc + curr.netSales, 0)}
+              </TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+            {/* <TableRow>
             <TableCell colSpan="100%" sx={{ padding: 0 }}>
               <Pagination count={10} color="primary" />
             </TableCell>
           </TableRow> */}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Box sx={{ display: "flex", justifyContent: "end", mt: 2 }}>
+        <Pagination
+          count={6} // Total number of pages
+          page={2} // Current active page
+          siblingCount={1} // Number of siblings shown around the active page
+          boundaryCount={1} // Number of boundary pages shown on each end
+          renderItem={(item) => (
+            <PaginationItem
+              {...item}
+              sx={{
+                borderRadius: "8px", // Square edges with slight rounding
+                border: item.selected ? "1.5px solid #E4E4E4" : "none", // Light gray border
+                minWidth: "36px", // Square shape
+                height: "36px", // Consistent height
+                fontSize: "14px", // Text size
+                // color: item.selected ? "#fff" : "#000", // White text on active
+                backgroundColor: item.selected ? "#F9FAFC" : "transparent", // Light gray background for active
+                "&:hover": {
+                  backgroundColor: item.selected ? "#E0E0E0" : "#f5f5f5", // Light hover effect
+                },
+              }}
+            />
+          )}
+        />
+      </Box>
+    </>
   );
 };
 

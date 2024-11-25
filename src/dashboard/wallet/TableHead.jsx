@@ -14,6 +14,7 @@ import {
   calendarIcon,
   downloadIcon,
   filterListIcon,
+  graySearchIcon,
   rightCheckIcon,
 } from "../../svgs/IconSvgs";
 import CalenderFilters from "./CalenderFilters";
@@ -38,7 +39,7 @@ const filters = [
   },
 ];
 
-function TableHead() {
+function TableHead({ handleSearch, search }) {
   const [selectedFilter, setSelectedFilter] = useState("all");
 
   const handleFilterChange = (event, newFilter) => {
@@ -100,7 +101,8 @@ function TableHead() {
           //   sx={{ flexGrow: 1, maxWidth: "500px" }}
           startAdornment={
             <InputAdornment position="start">
-              <FilterList />
+              {/* <FilterList /> */}
+              {graySearchIcon}
             </InputAdornment>
           }
           sx={{
@@ -110,6 +112,8 @@ function TableHead() {
             flexGrow: 1,
             maxWidth: "500px",
           }}
+          onChange={(e) => handleSearch(e.target.value)}
+          value={search}
         />
 
         {/* Actions */}
