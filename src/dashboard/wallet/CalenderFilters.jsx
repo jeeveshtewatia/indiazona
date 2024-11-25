@@ -1,5 +1,6 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
 import React from "react";
+import SingleInputDateRangePicker from "./RangePicker";
 
 const calenderFilterOptions = [
   {
@@ -54,7 +55,9 @@ const CalenderFilters = () => {
         <Typography sx={{ fontSize: "14px", fontWeight: 400 }}>
           Date range
         </Typography>
-        <Box>{/* <RangePicker /> */}</Box>
+        <Box>
+          <SingleInputDateRangePicker />
+        </Box>
       </Box>
       <Box sx={{ display: "flex", gap: 2, width: "100%", mt: 3 }}>
         <Button
