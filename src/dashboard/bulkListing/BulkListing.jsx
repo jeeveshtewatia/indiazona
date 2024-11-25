@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import { videoIcon } from "../svgs/IconSvgs";
+import { videoIcon } from "../../svgs/IconSvgs";
 
 const HighlightText = ({ children }) => {
   return (

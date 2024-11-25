@@ -34,12 +34,13 @@ import {
 } from "../svgs/IconSvgs";
 import { Fullscreen } from "@mui/icons-material";
 import ProductDetails from "./addNewProduct/ProductDetails";
-import BulkListingUI from "./BulkListing";
+import BulkListingUI from "./bulkListing/BulkListing";
 import { useSearchParams } from "react-router-dom";
 import AddNewProduct from "./addNewProduct/AddNewProduct";
-import BulkListing from "./BulkListing";
+import BulkListing from "./bulkListing/BulkListing";
 import AllProducts from "./allProducts/AllProducts";
 import CircleIcon from "@mui/icons-material/Circle";
+import Wallet from "./wallet/Wallet";
 const LogoIcon = (
   <svg
     width="38"
@@ -107,143 +108,73 @@ const navigationMenu = [
     id: "",
     icon: ordersIcon,
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
   {
     title: "Return & Exchange",
     id: "",
     icon: "",
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
   {
     title: "Penalties",
     id: "",
     icon: "",
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
   {
     title: "Your wallet",
-    id: "",
+    id: "wallet",
     icon: "",
-    disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
+    disable: false,
+    // subTitle: [
+    //   {
+    //     title: "Add New Product",
+    //     id: "",
+    //     onclick: "",
+    //   },
+    // ],
   },
   {
     title: "Coupon",
     id: "",
     icon: "",
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
   {
     title: "Shop Setting",
     id: "",
     icon: "",
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
   {
     title: "Product",
     id: "",
     icon: "",
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
   {
     title: "Uploaded Files",
     id: "",
     icon: "",
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
   {
     title: "Admin Message",
     id: "",
     icon: "",
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
   {
     title: "Support",
     id: "",
     icon: "",
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
   {
     title: "FAQ & Update",
     id: "",
     icon: "",
     disable: true,
-    subTitle: [
-      {
-        title: "Add New Product",
-        id: "",
-        onclick: "",
-      },
-    ],
   },
 ];
 
@@ -338,53 +269,74 @@ export default function PermanentDrawerLeft() {
           {homeIconDashboard}
           <Typography>Dashboard</Typography>
         </Box>
-        {navigationMenu.map((item, index) => (
-          <Accordion
-            sx={{ boxShadow: "none", border: "none" }}
-            expanded={expanded === item.title}
-            onChange={(e, expanded) =>
-              setExpanded(expanded ? item.title : false)
-            }
-          >
-            <AccordionSummary
-              sx={{
-                boxShadow: "none",
-                display: "flex",
-                border: "none",
-                alignItems: "center",
-              }}
-              expandIcon={index !== 0 ? null : <ArrowDownwardIcon />}
-              // aria-controls="panel1-content"
-              // id="panel1-header"
-              disabled={item.disable}
-            >
-              {/* <ListItemIcon> */}
-              {item.icon}
-              {/* </ListItemIcon> */}
-              <Typography sx={{ fontSize: "14px" }}>{item.title}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <List dense={true}>
-                {item.subTitle.map((subItem, subIndex) => (
-                  <ListItem key={subIndex} disablePadding>
-                    <ListItemButton
-                      onClick={() => setParams({ category: subItem.id })}
-                    >
-                      <ListItemText
-                        sx={{
-                          fontSize: "14px",
-                          color: `${subItem.id === category ? "#00C53C" : ""}`,
-                        }}
-                        primary={subItem.title}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                ))}
-              </List>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-        {/* </List> */}
+        <List>
+          {navigationMenu.map((item, index) =>
+            item.subTitle ? (
+              <Accordion
+                sx={{ boxShadow: "none", border: "none" }}
+                expanded={expanded === item.title}
+                onChange={(e, expanded) =>
+                  setExpanded(expanded ? item.title : false)
+                }
+              >
+                <AccordionSummary
+                  sx={{
+                    boxShadow: "none",
+                    display: "flex",
+                    border: "none",
+                    alignItems: "center",
+                  }}
+                  expandIcon={index !== 0 ? null : <ArrowDownwardIcon />}
+                  // aria-controls="panel1-content"
+                  // id="panel1-header"
+                  disabled={item.disable}
+                >
+                  {item.icon}
+                  <Typography sx={{ fontSize: "14px" }}>
+                    {item.title}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <List dense={true}>
+                    {item.subTitle.map((subItem, subIndex) => (
+                      <ListItem key={subIndex} disablePadding>
+                        <ListItemButton
+                          onClick={() => setParams({ category: subItem.id })}
+                        >
+                          <ListItemText
+                            sx={{
+                              fontSize: "14px",
+                              color: `${subItem.id === category ? "#00C53C" : ""}`,
+                            }}
+                            primary={subItem.title}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                    ))}
+                  </List>
+                </AccordionDetails>
+              </Accordion>
+            ) : (
+              <ListItem key={item.title} disablePadding disableGutters>
+                <ListItemButton
+                  onClick={() => setParams({ category: item.id })}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#F9F9F9",
+                    },
+                    padding: "10px 0",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  {item.icon}
+                  <Typography>{item.title}</Typography>
+                </ListItemButton>
+              </ListItem>
+            )
+          )}
+        </List>
       </Drawer>
       <Box
         position="fixed"
@@ -538,6 +490,7 @@ export default function PermanentDrawerLeft() {
       {!category && <AddNewProduct />}
       {category === "bulkListing" && <BulkListing />}
       {category === "allProducts" && <AllProducts />}
+      {category === "wallet" && <Wallet />}
     </Box>
   );
 }
