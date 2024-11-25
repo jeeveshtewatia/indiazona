@@ -284,6 +284,9 @@ export default function PermanentDrawerLeft() {
                     display: "flex",
                     border: "none",
                     alignItems: "center",
+                    color: `${item.id === category ? "#00C53C" : "#A1A1A1"}`,
+                    fontSize: "16px",
+                    fontWeight: 500,
                   }}
                   expandIcon={index !== 0 ? null : <ArrowDownwardIcon />}
                   // aria-controls="panel1-content"
@@ -291,9 +294,7 @@ export default function PermanentDrawerLeft() {
                   disabled={item.disable}
                 >
                   {item.icon}
-                  <Typography sx={{ fontSize: "14px" }}>
-                    {item.title}
-                  </Typography>
+                  <Typography>{item.title}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <List dense={true}>
@@ -327,7 +328,7 @@ export default function PermanentDrawerLeft() {
                     // padding: "10px 0",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
+                    justifyContent: "flex-start",
                     color: `${item.id === category ? "#00C53C" : "#A1A1A1"}`,
                     fontWeight: 500,
                     fontSize: "16px",
