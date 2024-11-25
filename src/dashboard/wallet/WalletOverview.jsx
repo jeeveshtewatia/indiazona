@@ -73,6 +73,7 @@ const WalletOverview = () => {
               width: "fit-content",
               color: "#FF8C00",
               height: "fit-content",
+              cursor: "pointer",
             }}
             onClick={() => setPaymentDialogOpen(true)}
           >

@@ -105,19 +105,19 @@ const navigationMenu = [
   },
   {
     title: "Orders",
-    id: "",
+    id: "orders",
     icon: ordersIcon,
     disable: true,
   },
   {
     title: "Return & Exchange",
-    id: "",
+    id: "returnExchange",
     icon: "",
     disable: true,
   },
   {
     title: "Penalties",
-    id: "",
+    id: "penalties",
     icon: "",
     disable: true,
   },
@@ -136,43 +136,43 @@ const navigationMenu = [
   },
   {
     title: "Coupon",
-    id: "",
+    id: "coupon",
     icon: "",
     disable: true,
   },
   {
     title: "Shop Setting",
-    id: "",
+    id: "shopSetting",
     icon: "",
     disable: true,
   },
   {
     title: "Product",
-    id: "",
+    id: "product",
     icon: "",
     disable: true,
   },
   {
     title: "Uploaded Files",
-    id: "",
+    id: "uploadedFiles",
     icon: "",
     disable: true,
   },
   {
     title: "Admin Message",
-    id: "",
+    id: "adminMessage",
     icon: "",
     disable: true,
   },
   {
     title: "Support",
-    id: "",
+    id: "support",
     icon: "",
     disable: true,
   },
   {
     title: "FAQ & Update",
-    id: "",
+    id: "faqUpdate",
     icon: "",
     disable: true,
   },
@@ -181,7 +181,6 @@ const navigationMenu = [
 export default function PermanentDrawerLeft() {
   const [search, setSearch] = React.useState("");
   const [expanded, setExpanded] = React.useState(false);
-  console.log("🚀 ~ PermanentDrawerLeft ~ expanded:", expanded);
   const [params, setParams] = useSearchParams();
   const category = params.get("category");
   return (
@@ -317,17 +316,26 @@ export default function PermanentDrawerLeft() {
                 </AccordionDetails>
               </Accordion>
             ) : (
-              <ListItem key={item.title} disablePadding disableGutters>
+              <ListItem key={item.title}>
+                {/* <ListItem key={item.title} disablePadding disableGutters> */}
                 <ListItemButton
                   onClick={() => setParams({ category: item.id })}
                   sx={{
                     "&:hover": {
                       backgroundColor: "#F9F9F9",
                     },
-                    padding: "10px 0",
+                    // padding: "10px 0",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "flex-start",
+                    justifyContent: "center",
+                    color: `${item.id === category ? "#00C53C" : "#A1A1A1"}`,
+                    fontWeight: 500,
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    borderRadius: "10px",
+                    backgroundColor: `${
+                      item.id === category ? "#DEFFE8" : "#ffff"
+                    }`,
                   }}
                 >
                   {item.icon}
